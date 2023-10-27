@@ -38,7 +38,7 @@ def __chunk_text(text):
 
 def __vectorise_chunks(chunks):
     # logging.debug(f"Vectorising chunks: {chunks[0]}")
-    embedding = GPT4AllEmbeddings(model_name="mistral-7b-instruct-v0.1.Q4_0.gguf", client=None)
+    embedding = GPT4AllEmbeddings(model_name="mistral-7b-instruct-v0.1.Q4_0.gguf", client=None)  # type: ignore
     vector = FAISS.from_documents(chunks, embedding=embedding)
     return vector
 

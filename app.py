@@ -78,7 +78,7 @@ if prompt := st.chat_input("", key="question"):
         st.stop()
 
     chain = (
-        {"question": RunnablePassthrough(), "context": st.session_state.vector.as_retriever()}
+        {"question": RunnablePassthrough(), "context": st.session_state.vector.as_retriever()}  # type: ignore
         | PromptTemplate.from_template(template)
         | st.session_state.model
     )
