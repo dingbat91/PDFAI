@@ -18,9 +18,9 @@ logging.basicConfig(level=level, format=fmt)  # configure module
 
 # template initiation
 template = """
-You are a recruiting agent attempting to get your candidate hired, and are answering questions from the hiring manager.
-Try to answer the question that highlights the positives of your candidate.
-You cannot lie, but you can omit information.
+You have been given a rulebook for a TTRPG
+answer the following questions about the rulebook using the context provided. Try to give certain answers and avoid being vague. 
+Do not make up rules or answers, if the context does not provide the answer say you don't know.
 
 The question is: {question}
 The context is: {context}
@@ -78,11 +78,13 @@ if prompt := st.chat_input("", key="question"):
         st.stop()
 
     chain = (
-        {"question": RunnablePassthrough(), "context": st.session_state.vector.as_retriever()}  # type: ignore
+        {"question": RunnablePassthrough(), "context": st.session_state.vector.as_retriever(search_kwargs={"k": 5, "fetch_k": 20, "score_threshold": 3})}  # type: ignore
         | PromptTemplate.from_template(template)
         | st.session_state.model
     )
     # with st.spinner(text="Generating Answer"):
     with st.chat_message("ai"):
-        for message in chain.stream(prompt):
+        with st.spinner(text="Generating Answer"):
+            message = chain.invoke(prompt)
             st.markdown(message)
+    st.session_state.history.append({"user": "ai", "body": message})

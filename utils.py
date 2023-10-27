@@ -31,8 +31,9 @@ def __load_pdf(files):
 def __chunk_text(text):
     # takes a string and returns a list of strings
     # logging.debug(f"Chunking text: {text}")
-    splitter = CharacterTextSplitter(separator="\n\n", chunk_size=1000, chunk_overlap=200)
-    chunks = splitter.create_documents(text)
+    splitter = CharacterTextSplitter(separator="\n", chunk_size=400, chunk_overlap=100)
+    docs = splitter.create_documents(text)
+    chunks = splitter.split_documents(docs)
     return chunks
 
 
