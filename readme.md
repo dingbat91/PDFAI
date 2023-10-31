@@ -6,6 +6,8 @@ Hey everyone, this is my learning attempt to create a functional tool for asking
 
 The UI is created using [streamlit](https://streamlit.io/) and the LLM is operated from processed using [Langchain](https://www.langchain.com/) and FAISS for vector database storage. the model used is hardcoded currently as the [Mistral-7B-OpenOrca](https://huggingface.co/Open-Orca/Mistral-7B-OpenOrca) model from huggingface.
 
+included is my CV, which is the pdf I have been using to test the model, and because if you're looking for someone excited to learn. Here I am!
+
 ## Usage
 
 To begin create a virtual environment and install the requirements.txt file. Then run the following command to begin the application:
