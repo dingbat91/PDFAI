@@ -16,15 +16,15 @@ streamlit run app.py
 
 This will open a browser, that after loading (and if needed, downloading) the model will display the following information:
 
-[display of the url webpage](readmefiles/Image1.png)
+![display of the url webpage](readmefiles/Image1.png)
 
 using the sidebar on the left import a pdf (you can import multiple but your mileage may vary on success of processing) after that hit the "submit PDF" button
 
-[image of the sidebar showing an uploaded pdf](readmefiles/Image2.png)
+![image of the sidebar showing an uploaded pdf](readmefiles/Image2.png)
 
 After the spinner has finished you can begin interacting with the model by typing into the main chat windows.
 
-[image of the chat window](readmefiles/Image3.png)
+![image of the chat window](readmefiles/Image3.png)
 
 Debug information can be found in the console window that the streamlit app is running in.
 
