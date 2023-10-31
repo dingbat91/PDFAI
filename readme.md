@@ -36,3 +36,5 @@ Debug information can be found in the console window that the streamlit app is r
 ## limitations
 
 So the program is currently not hugely optimised in any way. There is an initial loading period that can be long as it downloads the LLM, and any pdf input needs to be fairly clean. It also runs the LLM locally so while you won't need an API key, it's ability to function is limited by your local machine.
+
+It also primarily uses the CPU rather than the GPU, I believe this can be solved by changing to a different version of pytorch but I have yet to attempt implementing or testing that.
