@@ -12,12 +12,12 @@ from langchain.prompts import ChatPromptTemplate, PromptTemplate
 st.set_page_config(page_title="PDF Questioner", page_icon="📚", layout="wide")
 
 # debug configration
-level = logging.DEBUG  # sets level of shown logs
-fmt = "[%(levelname)s] %(asctime)s - %(message)s"  # log output
-logging.basicConfig(level=level, format=fmt)  # configure module
+LEVEL = logging.DEBUG  # sets level of shown logs
+FMT = "[%(levelname)s] %(asctime)s - %(message)s"  # log output
+logging.basicConfig(level=LEVEL, format=FMT)  # configure module
 
 # template initiation
-template = """
+TEMPLATE = """
 You have been given a rulebook for a TTRPG
 answer the following questions about the rulebook using the context provided. Try to give certain answers and avoid being vague. 
 Do not make up rules or answers, if the context does not provide the answer say you don't know.
@@ -30,6 +30,7 @@ output you answer in a human readable format. Don't tab or indent your answer.
 """
 
 
+# Loads the model and stores the result in a cache
 @st.cache_resource
 def load_model():
     return GPT4All(model="mistral-7b-openorca.Q4_0.gguf", max_tokens=1000, streaming=True)  # type: ignore
@@ -79,7 +80,7 @@ if prompt := st.chat_input("", key="question"):
 
     chain = (
         {"question": RunnablePassthrough(), "context": st.session_state.vector.as_retriever(search_kwargs={"k": 5, "fetch_k": 20, "score_threshold": 3})}  # type: ignore
-        | PromptTemplate.from_template(template)
+        | PromptTemplate.from_template(TEMPLATE)
         | st.session_state.model
     )
     # with st.spinner(text="Generating Answer"):
